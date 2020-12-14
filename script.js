@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 
-const iterations = 13;
+const iterations = 14;
 let segmentsArray = [];
 
 class Segment {
@@ -15,7 +15,8 @@ class Segment {
     this.dy = Math.sin(angle) * length;
     this.pointA = [x, y];
     this.pointB = [x + this.dx, y + this.dy];
-    this.color = '#fff';
+    this.hue = x / canvas.width * 360;
+    this.color = `hsla(${this.hue}, 100%, 50%, 1)`;
   }
   divide() {
     let theta1 = this.angle - Math.PI / 4;
@@ -50,7 +51,7 @@ function constructCurve() {
 }
 
 function init() {
-  segmentsArray.push(new Segment(150, canvas.width / 2, canvas.height / 2, 0));
+  segmentsArray.push(new Segment(300, canvas.width / 2 - 120, canvas.height / 2 + 50, 0));
   constructCurve();
   drawCurve();
 }
